@@ -17,6 +17,12 @@ support antara lain :
 * QR Payment
     * QRIS
 
+
+Tagihan yang disupport :
+* CLOSED - Pembayaran sesuai nominal
+* OPEN - Pembayaran bebas nominal
+* INSTALLMENT - Pembayaran selama akumulasi lebih kecil sama dengan nilai tagihan
+
 # Cara Setup Database #
 
 1. Download [Docker](https://hub.docker.com)
