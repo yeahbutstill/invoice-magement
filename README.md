@@ -17,8 +17,8 @@ support antara lain :
 * QR Payment
     * QRIS
 
-
 Tagihan yang disupport :
+
 * CLOSED - Pembayaran sesuai nominal
 * OPEN - Pembayaran bebas nominal
 * INSTALLMENT - Pembayaran selama akumulasi lebih kecil sama dengan nilai tagihan
@@ -95,16 +95,25 @@ ini akan menampilkan output berikut :
 3. Tambahkan `application.properties` didalam `src/main/resources/` :
 
   ```properties
-    spring.jpa.hibernate.ddl-auto=validate
-    spring.datasource.url=jdbc:mysql://${MYSQL_HOST:127.0.0.1}:6603/invoicedb
-    spring.datasource.username=invoice
-    spring.datasource.password=JBJwTMMYyZ8yy8eBaY3kPb6p
-    spring.datasource.driver-class-name=com.mysql.jdbc.Driver
-    spring.jpa.properties.hibernate.format_sql=true
-    ## this is default false but in devlopment we need this true
-    spring.jpa.show-sql= true
+    ## update <- from entity class or validate from entity class to schema sql
+spring.jpa.hibernate.ddl-auto=validate
+spring.datasource.url=jdbc:mysql://${MYSQL_HOST:127.0.0.1}:6603/invoicedb
+spring.datasource.username=root
+spring.datasource.password=JBJwTMMYyZ8yy8eBaY3kPb6p
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.properties.hibernate.format_sql=true
+## this is default false but in devlopment we need this true
+spring.jpa.show-sql=true
   ```
 
 4. kemudian buat `db.migration` menggunakan penulisan [Calver](https://calver.org/) (*Calender Versioning*) untuk
    awalanya harus menggunakan huruf `V` ini wajib karena permintaan dari [Flyaway](https://flywaydb.org/) (*Version
-   Control For Your Database*) buat file **V20210701__First_Schema.sql**
+   Control For Your Database*) buat
+   file [V20210701__First_Schema.sql](https://github.com/yeahbutstill/invoice-magement/blob/main/src/main/resources/db/migration/V20210701__First_Schema.sql)
+
+
+5. menjalankan applikasi dan mengecek apakah sudah benar skema db *entitiy* *class* yang sudah dibuat :
+
+```shell
+  mvn clean spring-boot:run
+```
