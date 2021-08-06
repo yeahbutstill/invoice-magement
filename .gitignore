@@ -39,3 +39,6 @@ storage/
 .mvn/
 mvnw
 mvnw.cmd
+
+### Git ###
+.gitignore

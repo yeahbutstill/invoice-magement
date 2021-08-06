@@ -9,13 +9,13 @@ import org.springframework.test.context.jdbc.Sql;
 
 @SpringBootTest
 @Sql(scripts = {"/sql/delete-invoice-type.sql", "/sql/insert-inactive-invoice-type.sql"})
-public class InvoiceTypeDaoTests {
+class InvoiceTypeDaoTests {
 
     @Autowired
     InvoiceTypeDao invoiceTypeDao;
 
     @Test
-    public void testInsertInvoiceType() throws InterruptedException {
+    void testInsertInvoiceType() throws InterruptedException {
 
         InvoiceType invoiceType = new InvoiceType();
         invoiceType.setCode("IT-001");

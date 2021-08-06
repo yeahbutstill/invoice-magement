@@ -23,6 +23,19 @@ Tagihan yang disupport :
 * OPEN - Pembayaran bebas nominal
 * INSTALLMENT - Pembayaran selama akumulasi lebih kecil sama dengan nilai tagihan
 
+Fitur aplikasi :
+
+* Manajemen Customer A.K.A Debitur
+    * Registrasi Customer
+    * Rekap tagihan Customer
+    * Histori pembayaran
+
+
+* Manajemen invoice
+    * Membuat invoice
+    * Memanggil nilai dan tanggal jatuh tempo
+    * Membatalkan invoice
+
 # Cara Setup Database #
 
 1. Download [Docker](https://hub.docker.com)

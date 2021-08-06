@@ -4,7 +4,9 @@ import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,6 +28,11 @@ public class VirtualAccount extends BaseEntity {
     private Invoice invoice;
 
     @NotNull
+    @ManyToOne
+    @JoinColumn(name = "id_virtual_account_configuration", unique = true)
+    private VirtualAccountConfiguration virtualAccountConfiguration;
+
+    @NotNull
     @NotEmpty
     @Size(min = 1)
     private String companyId;
@@ -34,9 +41,5 @@ public class VirtualAccount extends BaseEntity {
     @NotEmpty
     @Size(min = 1)
     private String accountNumber;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private VirtualAccountType virtualAccountType = VirtualAccountType.CLOSED;
 
 }

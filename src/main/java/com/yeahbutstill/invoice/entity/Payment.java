@@ -1,6 +1,8 @@
 package com.yeahbutstill.invoice.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -13,6 +15,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
+@SQLDelete(sql = "UPDATE payment SET status_record='INACTIVE' WHERE id=?")
+@Where(clause = "status_record='ACTIVE'")
 public class Payment extends BaseEntity {
 
     @NotNull
@@ -22,6 +26,9 @@ public class Payment extends BaseEntity {
 
     @NotNull
     private LocalDateTime transactionTime;
+
+    @NotNull
+    private BigDecimal transactionFee;
 
     @NotNull
     @NotEmpty

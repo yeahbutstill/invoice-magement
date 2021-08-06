@@ -4,10 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,13 +15,12 @@ import java.util.Set;
 @Data
 @SQLDelete(sql = "UPDATE invoice_type SET status_record='INACTIVE' WHERE id=?")
 @Where(clause = "status_record='ACTIVE'")
-//@FilterDef(name = "deletedInvoiceType", parameters = @ParamDef(name = "statusRecord", type = ""))
-//@Filter()
 public class InvoiceType extends BaseEntity {
 
     @NotNull
     @NotEmpty
     @Size(min = 3, max = 100)
+    @Column(unique = true)
     private String code;
 
     @NotNull
@@ -32,12 +28,25 @@ public class InvoiceType extends BaseEntity {
     @Size(min = 3, max = 100)
     private String name;
 
-    @ManyToMany
+    @NotNull
+    @NotEmpty
+    @Size(min = 3, max = 50)
+    private String paymentType;
+
+//    @ManyToMany()
+//    @JoinTable(
+//            name = "invoice_type_provider",
+//            joinColumns = @JoinColumn(name = "id_invoice_type"),
+//            inverseJoinColumns = @JoinColumn(name = "id_payment_provider")
+//    )
+//    private Set<PaymentProvider> paymentProviders = new HashSet<>();
+
+    @ManyToMany()
     @JoinTable(
-            name = "invoice_type_provider",
+            name = "invoice_type_configuration",
             joinColumns = @JoinColumn(name = "id_invoice_type"),
-            inverseJoinColumns = @JoinColumn(name = "id_payment_provider")
+            inverseJoinColumns = @JoinColumn(name = "id_virtual_account_configuration")
     )
-    private Set<PaymentProvider> paymentProviders = new HashSet<>();
+    private Set<VirtualAccountConfiguration> virtualAccountConfigurations = new HashSet<>();
 
 }

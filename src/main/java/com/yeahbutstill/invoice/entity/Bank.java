@@ -12,9 +12,9 @@ import javax.validation.constraints.Size;
 
 @Data
 @Entity
-@SQLDelete(sql = "UPDATE payment_provider SET status_record='INACTIVE' WHERE id=?")
+@SQLDelete(sql = "UPDATE bank SET status_record='INACTIVE' WHERE id=?")
 @Where(clause = "status_record='ACTIVE'")
-public class PaymentProvider extends BaseEntity {
+public class Bank extends BaseEntity {
 
     @NotNull
     @NotEmpty
@@ -27,6 +27,9 @@ public class PaymentProvider extends BaseEntity {
     @Size(min = 3, max = 100)
     private String name;
 
-    private String logo;
+    @NotNull
+    @NotEmpty
+    @Size(min = 3, max = 100)
+    private String centralBankCode;
 
 }
